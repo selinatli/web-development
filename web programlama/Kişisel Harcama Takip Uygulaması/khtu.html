@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Harcama Takip Uygulaması</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            max-width: 600px;
+            margin: 40px auto;
+            background: white;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        form input,
+        form select,
+        form button {
+            padding: 10px;
+            margin: 5px 0;
+            width: 100%;
+        }
+
+        li {
+            background: white;
+            padding: 10px;
+            margin: 5px 0;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        .total {
+            margin-top: 10px;
+            font-weight: bold;
+            text-align: right;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Harcama Takip</h1>
+
+    <form id="expense-form">
+        <input type="text" id="title" placeholder="Harcama adı" required>
+        <input type="number" id="amount" placeholder="Tutar" required>
+
+        <select id="category">
+            <option>Yemek</option>
+            <option>Ulaşım</option>
+            <option>Eğlence</option>
+            <option>Fatura</option>
+        </select>
+
+        <button type="submit">Ekle</button>
+    </form>
+
+    <ul id="expense-list"></ul>
+
+    <div class="total">
+        Toplam: <span id="total">0</span> TL
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            let expenses = JSON.parse(localStorage.getItem("expenses")) || [];
+
+            const form = document.getElementById("expense-form");
+            const list = document.getElementById("expense-list");
+            const totalEl = document.getElementById("total");
+
+            // Sayfa açılınca eski kayıtları göster
+            showExpenses();
+            updateTotal();
+
+            form.addEventListener("submit", function (e) {
+                e.preventDefault();
+
+                const title = document.getElementById("title").value;
+                const amount = Number(document.getElementById("amount").value);
+                const category = document.getElementById("category").value;
+
+                const expense = {
+                    title: title,
+                    amount: amount,
+                    category: category
+                };
+
+                expenses.push(expense);
+
+                saveData();
+                showExpenses();
+                updateTotal();
+
+                form.reset();
+            });
+
+            function saveData() {
+                localStorage.setItem("expenses", JSON.stringify(expenses));
+            }
+
+            function showExpenses() {
+                list.innerHTML = "";
+
+                for (let i = 0; i < expenses.length; i++) {
+
+                    const li = document.createElement("li");
+
+                    li.textContent =
+                        expenses[i].title + " - " +
+                        expenses[i].amount + " TL (" +
+                        expenses[i].category + ")";
+
+                    const deleteBtn = document.createElement("button");
+                    deleteBtn.textContent = "Sil";
+
+                    deleteBtn.addEventListener("click", function () {
+                        expenses.splice(i, 1);
+                        saveData();
+                        showExpenses();
+                        updateTotal();
+                    });
+
+                    li.appendChild(deleteBtn);
+                    list.appendChild(li);
+                }
+            }
+
+            function updateTotal() {
+                let total = 0;
+
+                for (let i = 0; i < expenses.length; i++) {
+                    total = total + expenses[i].amount;
+                }
+
+                totalEl.textContent = total;
+            }
+
+        });
+    </script>
+
+</body>
+
+</html>

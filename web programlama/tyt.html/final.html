@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tablo Verileri</title>
+</head>
+<body>
+    <h1 id="baslik">Tablo Verileri</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Öğrenci adı</th>
+                <th>Öğrenci soyadı</th>
+                <th>Öğrenci numarası</th>
+                <th>İşlemler</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Ali</td>
+                <td>Yılmaz</td>
+                <td>1234567890</td>
+                <td>
+                    <button onclick="duzenle(this)">Düzenle</button>
+                    <button onclick="sil(this)">Sil</button>
+                </td>
+            </tr>
+            <tr>
+                <td>Ayşe</td>
+                <td>Kara</td>
+                <td>1234567890</td>
+                <td>
+                    <button onclick="duzenle(this)">Düzenle</button>
+                    <button onclick="sil(this)">Sil</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script>
+        function duzenle(butonumuz) {
+            // Önceki kardeş öğelere (td) giderek metni değiştirir [cite: 45, 46]
+            butonumuz.parentElement.previousElementSibling.previousElementSibling.previousElementSibling.innerText = "Bayram";
+        }
+
+        function sil(butonumuz) {
+            // Butonun üst öğesi olan satırı (tr) tamamen siler [cite: 49]
+            butonumuz.parentElement.parentElement.remove();
+        }
+    </script>
+</body>
+</html>

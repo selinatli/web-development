@@ -1,0 +1,28 @@
+
+.profil-kartı{
+    background-color: blueviolet;
+    padding: 15px;
+    border-radius: 10px;
+    width: 220px;
+    text-align: center;
+    font-family: Arial,sans-serif;
+    position: relative;
+    margin: 50px auto;
+
+}
+
+.profil-kartı img {
+    border: 1px solid lightcoral;
+    border-radius: 10px;
+}
+
+.bildirim-sayısı{
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    background-color: darkmagenta;
+    color: azure;
+    border-radius: 50%;
+    padding: 3px 7px;
+    font-size: 12px;
+}

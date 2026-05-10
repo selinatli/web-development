@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dinamik Tablo</title>
+</head>
+<body>
+    <button id="myButton">Tıkla</button>
+
+    <script>
+        const myButton = document.getElementById("myButton");
+
+        myButton.addEventListener("click", function () {
+            fetch("https://jsonplaceholder.typicode.com/users")
+                .then(response => response.json())
+                .then(yanit => {
+                    console.log("yanit", yanit);
+                    const table = document.createElement("table");
+                    table.border = "1";
+                    table.innerHTML = `
+                        <thead>
+                            <tr>
+                                <th>id</th>
+                                <th>name</th>
+                                <th>username</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    `;
+
+                    const tbodyimiz = table.querySelector("tbody");
+
+                    for (let i = 0; i < yanit.length; i++) {
+                        const tr = document.createElement("tr");
+                        
+                        // Alternatif yöntem: innerHTML ile satır oluşturma [cite: 207]
+                        tr.innerHTML = `
+                            <td>${yanit[i].id}</td>
+                            <td>${yanit[i].name}</td>
+                            <td>${yanit[i].username}</td>
+                        `;
+                        
+                        tbodyimiz.appendChild(tr);
+                    }
+                    document.body.appendChild(table);
+                });
+        });
+    </script>
+</body>
+</html>

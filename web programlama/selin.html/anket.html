@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anket</title>
+</head>
+
+<body>
+    <h1>Ders Zorluk Anketi</h1>
+    <p>Aşağıdaki tabloda verilen derslerin kendinize göre zorluk derecesini seçiniz.</p>
+    <form>
+        <label for="ad">Adınız</label><br />
+        <input type="text" id="ad" placeholder="Adınızı giriniz" />
+        <br /><br />
+        <label for="soyad">Soyadınız</label><br />
+        <input type="text" id="soyad" placeholder="Soyadınızı giriniz" />
+        <br><br>
+        <label for="no">Öğrenci Numaranız</label><br>
+        <input type="number" id="no" placeholder="Öğrenci no giriniz" />
+        <br><br>
+        <label for="kayıt">Üniversite Kayıt Tarihiniz</label><br>
+        <input type="date" id="kayıt" placeholder="Üniversite kayıt tarihini giriniz" />
+        <br><br>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Ders</th>
+                    <th>Kolay</th>
+                    <th>Orta</th>
+                    <th>Zor</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Algoritma Geliştirme</td>
+                    <td>
+                        <input type="radio" name="Algoritma" />
+                    </td>
+                    <td>
+                        <input type="radio" name="Algoritma" />
+                    </td>
+                    <td>
+                        <input type="radio" name="Algoritma" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Programlamaya Giriş</td>
+                    <td>
+                        <input type="radio" name="Programlama" />
+                    </td>
+                    <td>
+                        <input type="radio" name="Programlama" />
+                    </td>
+                    <td>
+                        <input type="radio" name="Programlama" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Veritabanı Sistemleri</td>
+                    <td>
+                        <input type="radio" name="Veritabanı" />
+                    </td>
+                    <td>
+                        <input type="radio" name="Veritabanı" />
+                    </td>
+                    <td>
+                        <input type="radio" name="Veritabanı" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Görsel Programlama</td>
+                    <td>
+                        <input type="radio" name="Görsel" />
+                    </td>
+                    <td>
+                        <input type="radio" name="Görsel" />
+                    </td>
+                    <td>
+                        <input type="radio" name="Görsel" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Web Programlama</td>
+                    <td>
+                        <input type="radio" name="Web">
+                    </td>
+                    <td>
+                        <input type="radio" name="Web">
+                    </td>
+                    <td>
+                        <input type="radio" name="Web">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <br><br>
+        <label for="sevilen">En sevdiğiniz ders</label><br>
+        <select id="sevilen">
+            <option selected>--Ders Seçiniz--</option>
+            <option value="Algoritma">Algoritma Geliştirme</option>
+            <option value="Programlama">Programlamaya Giriş</option>
+            <option value="Veritabanı">Veritabanı Sistemleri</option>
+            <option value="Görsel">Görsel Programlama</option>
+            <option value="Web">Web Programlama</option>
+        </select>
+        <br><br>
+        <label for="görüş">Varsa görüşlerinizi bildiriniz:</label><br>
+        <textarea id="görüş" cols="35"></textarea>
+        <br><br>
+        <input type="checkbox" id="kabul" />
+        <label for="kabul">Bilgilerimin paylaşılmasını kabul ediyorum.</label><br>
+        <button type="submit">Gönder</button>
+    </form>
+</body>
+</html>

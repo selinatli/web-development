@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>TYT Sonuç Belgesi</title>
+
+    <style>
+        #btn {
+            background: blue;
+            color: white;
+            border-radius: 5px;
+            padding: 6px;
+            margin-bottom: 15px;
+        }
+        th { 
+            background: lightblue; 
+        }
+    </style>
+</head>
+<body>
+
+<button id="btn" onclick="getSonuc()">Sınav Sonucunu Getir</button>
+
+<div id="sonuc" style="display:none">
+    <h3>TYT Sonuç Belgesi</h3>
+    <p>TC: <b id="tc"></b>  |  Ad: <b id="ad"></b></p>
+
+    <table border="1">
+        <tr>
+            <th>TÜRKÇE</th>
+            <th>SOSYAL</th>
+            <th>MAT</th>
+            <th>FEN</th>
+        </tr>
+
+        <tr>
+            <td id="Turkce"></td>
+            <td id="Sosyal"></td>
+            <td id="Matematik"></td>
+            <td id="Fen"></td>
+        </tr>
+    </table>
+</div>
+
+<script>
+function getSonuc() {
+    const panel = document.getElementById('sonuc');
+
+    if (panel.style.display === 'block') {
+        panel.style.display = 'none'; // Kapatma
+    } else {
+        fetch('https://tytsonuc.com/bayram')
+            .then(res => res.json())
+            .then(data => {
+
+                document.getElementById('tc').innerText = data.TC;
+                document.getElementById('ad').innerText = data.Ad + " " + data.Soyad;
+
+                // Gelen dizideki her dersi kendi ID'sine (isme göre) yazdırır
+                data.Puanlar.forEach(p => {
+                    const hucre = document.getElementById(p.Ders);
+                    if (hucre) hucre.innerHTML = `D: ${p.Dogru} <br> Y: ${p.Yanlis}`;
+                });
+
+                panel.style.display = 'block'; // Açma
+            });
+    }
+}
+</script>
+
+</body>
+</html>
+
+   

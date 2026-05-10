@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tek Kart Gösterme</title>
+    <style>
+        .kapsayici {
+            width: 100vw;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .kart-icerigi {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin-top: 20px;
+            display: none;
+            /* Başlangıçta gizli [cite: 78] */
+        }
+
+        .kart-icerigi h2 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        .profil-bilgileri {
+            text-align: left;
+            margin-top: 15px;
+        }
+
+        .profil-bilgileri p {
+            margin: 8px 0;
+            color: #34495e;
+        }
+
+        button {
+            background-color: blue;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="kapsayici">
+        <button onclick="getProfile()">Profil Getir</button>
+        <div class="kart-icerigi">
+            <h2>Kullanıcı Profili</h2>
+            <div class="profil-bilgileri">
+                <p><strong>İsim:</strong> <span id="name"></span></p>
+                <p><strong>Kullanıcı Adı:</strong> <span id="username"></span></p>
+                <p><strong>E-posta:</strong> <span id="email"></span></p>
+                <p><strong>Telefon:</strong> <span id="phone"></span></p>
+                <p><strong>Website:</strong> <span id="website"></span></p>
+                <p><strong>Şirket:</strong> <span id="company"></span></p>
+                <p><strong>Adres:</strong> <span id="address"></span></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function getProfile() {
+
+            const profileCard = document.querySelector(".kart-icerigi");
+
+            profileCard.style.display = "none";
+
+            fetch("https://jsonplaceholder.typicode.com/users/1")
+                .then(response => response.json())
+                .then(user => {
+                    console.log("gelen user verisi", user);
+                    document.getElementById("name").textContent = user.name;
+                    document.getElementById("username").textContent = user.username;
+                    document.getElementById("email").textContent = user.email;
+                    document.getElementById("phone").textContent = user.phone;
+                    document.getElementById("website").textContent = user.website;
+                    document.getElementById("company").textContent = user.company.name;
+                    document.getElementById("address").textContent = `${user.address.street}, ${user.address.suite}, ${user.address.city}`;
+
+                    profileCard.style.display = "block";
+                })
+                .catch(error => {
+                    alert("Profil bilgileri alınırken bir hata oluştu!");
+                    console.error("Hata:", error);
+                })
+
+        }
+    </script>
+</body>
+
+</html>
