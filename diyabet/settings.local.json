@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python diyabet_analizi.py)",
+      "Bash(pip install:*)",
+      "Bash(python -X utf8 diyabet_analizi.py)"
+    ]
+  }
+}
